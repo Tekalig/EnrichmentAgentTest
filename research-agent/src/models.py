@@ -1,4 +1,4 @@
-"""Data models for Enrichment Agent."""
+"""Data models for Research Agent."""
 
 from typing import Dict, Any, List, Optional
 from datetime import datetime

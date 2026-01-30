@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  research-agent:
+    build: .
+    image: research-agent:latest
+    container_name: research-agent
+    env_file:
+      - .env
+    volumes:
+      - ./prompts:/app/prompts:ro
+      - ./schemas:/app/schemas:ro
+      - ./output:/app/output
+    command: --help

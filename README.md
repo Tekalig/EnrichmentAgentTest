@@ -2,6 +2,10 @@
 
 Two independent microservices for sales prospecting and email tracking automation.
 
+> **📖 Detailed Documentation:**
+> - Research Agent: See [research-agent/README.md](research-agent/README.md)
+> - Email Open Discord Notifier: See [email-open-discord-notifier/README.md](email-open-discord-notifier/README.md)
+
 ## Services Overview
 
 ### 1. Research Agent
@@ -58,15 +62,16 @@ cd research-agent
 
 # Configure
 cp .env.example .env
-# Add API keys: FIRECRAWL_API_KEY, BRIGHTDATA_API_KEY
+# Add API keys: FIRECRAWL_API_KEY, ANTHROPIC_API_KEY
 
 # Run locally
 pip install -r requirements.txt
-python cli.py research "Acme Corp" --website https://acme.com
+python cli.py list-schemas
+python cli.py enrich https://example.com --schema company_info --prompt company_info
 
 # Or with Docker
 docker-compose build
-docker-compose run research-agent research "Acme Corp" --website https://acme.com
+docker-compose run research-agent list-schemas
 ```
 
 ### Email Open Notifier
@@ -86,17 +91,20 @@ python main.py
 docker-compose up -d
 
 # Test
+curl http://localhost:8000/health
 curl -X POST http://localhost:8000/test/notification
 ```
 
 ## API Keys Required
 
 ### Research Agent
-- **Firecrawl API** - Website scraping
+- **Firecrawl API** (Required) - Website scraping
   - Get at: https://firecrawl.dev
-- **Bright Data API** - LinkedIn data
+- **Anthropic API** (Required) - LLM data extraction
+  - Get at: https://anthropic.com
+- **Bright Data API** (Optional) - LinkedIn data
   - Get at: https://brightdata.com
-- **Google Service Account** (optional) - Sheets export
+- **Google Service Account** (Optional) - Sheets export
   - Create at: https://console.cloud.google.com
 
 ### Email Open Notifier

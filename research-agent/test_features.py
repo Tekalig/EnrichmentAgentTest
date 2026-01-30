@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test script for verifying feature implementations"""
+"""Test script for verifying Research Agent feature implementations."""
 
 import sys
 import json
@@ -107,33 +107,6 @@ def test_extractor_structure():
     return True
 
 
-def test_email_notifier_structure():
-    """Test Feature 4: Email Open Discord Notifier"""
-    print("=" * 60)
-    print("FEATURE 4: Email Open Discord Notifier (FastAPI Service)")
-    print("=" * 60)
-    
-    try:
-        # Check if main.py exists
-        import main
-        print("✓ main.py module available")
-        print("✓ FastAPI app defined")
-        
-        # Check for key endpoints
-        app = main.app
-        routes = [route.path for route in app.routes]
-        print(f"✓ Found {len(routes)} routes:")
-        for route in routes[:10]:  # Show first 10
-            print(f"  - {route}")
-            
-    except Exception as e:
-        print(f"✗ Email notifier test failed: {e}")
-        return False
-    
-    print()
-    return True
-
-
 def test_batch_processing():
     """Test Feature 5: Batch Processing for Multiple URLs"""
     print("=" * 60)
@@ -159,7 +132,8 @@ def test_batch_processing():
         result = subprocess.run(
             ["python3", "cli.py", "batch", "--help"],
             capture_output=True,
-            text=True
+            text=True,
+            cwd=Path(__file__).resolve().parent
         )
         
         if result.returncode == 0 and "Batch enrich" in result.stdout:
@@ -178,19 +152,18 @@ def test_batch_processing():
 
 
 def main():
-    """Run all feature tests"""
+    """Run all Research Agent feature tests."""
     print("\n" + "=" * 60)
-    print("FEATURE VERIFICATION TEST SUITE")
+    print("RESEARCH AGENT FEATURE VERIFICATION TEST SUITE")
     print("=" * 60)
     print()
     
     results = []
     
-    # Test each feature
+    # Test Research Agent features only (Email Notifier has its own tests in email-open-discord-notifier/)
     results.append(("Feature 1: CLI Interface", test_cli_structure()))
     results.append(("Feature 2: Website Scraping", test_scraper_structure()))
     results.append(("Feature 3: LLM Extraction", test_extractor_structure()))
-    results.append(("Feature 4: Email Notifier", test_email_notifier_structure()))
     results.append(("Feature 5: Batch Processing", test_batch_processing()))
     
     # Summary

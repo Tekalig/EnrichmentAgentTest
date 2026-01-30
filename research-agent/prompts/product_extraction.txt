@@ -1,0 +1,15 @@
+Extract product and service information from the website content below.
+
+URL: {{ url }}
+Company: {{ company_name }}
+
+Website Content:
+{{ content }}
+
+Focus on identifying:
+- Main products or services offered
+- Target market or customer segments
+- Key features and benefits
+- Pricing information if available
+
+Extract according to the schema provided.

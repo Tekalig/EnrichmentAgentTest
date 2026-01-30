@@ -38,18 +38,26 @@ Two independent microservices for sales prospecting and email tracking automatio
 
 ```
 .
+├── README.md                    # This file
+├── .gitignore
 ├── research-agent/              # Service 1: Prospect Research
 │   ├── cli.py                   # CLI application
-│   ├── src/                     # Source code
+│   ├── src/                     # Source code (scraper, extractor, etc.)
+│   ├── prompts/                 # Prompt templates
+│   ├── schemas/                 # Extraction schemas
 │   ├── Dockerfile
 │   ├── docker-compose.yml
+│   ├── requirements.txt
+│   ├── .env.example
 │   └── README.md
 │
 └── email-open-discord-notifier/ # Service 2: Email Tracking
     ├── main.py                  # FastAPI application
-    ├── src/                     # Source code
+    ├── src/                     # Source code (Close.io, Discord, cache)
     ├── Dockerfile
     ├── docker-compose.yml
+    ├── requirements.txt
+    ├── .env.example
     └── README.md
 ```
 

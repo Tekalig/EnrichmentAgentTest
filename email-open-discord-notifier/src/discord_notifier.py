@@ -72,7 +72,7 @@ class DiscordNotifier:
                 "url": settings.DISCORD_WEBHOOK_URL,
                 "name": "default"
             }]
-            print(f"Using Discord webhook from environment variable")
+            print("Using Discord webhook from environment variable")
         
         return webhooks
     

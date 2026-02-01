@@ -35,9 +35,9 @@ class LLMExtractor:
         
         full_prompt = f"""{rendered_prompt}
 
-{schema_description}
+        {schema_description}
 
-IMPORTANT: Return ONLY valid JSON matching the schema. No markdown, no explanation, just the JSON object."""
+    IMPORTANT: Return ONLY valid JSON matching the schema. No markdown, no explanation, just the JSON object."""
         
         response = self.client.messages.create(
             model=settings.ANTHROPIC_MODEL,
@@ -54,12 +54,12 @@ IMPORTANT: Return ONLY valid JSON matching the schema. No markdown, no explanati
     def _build_schema_description(self, schema: ExtractionSchema) -> str:
         """Build a description of the schema for Claude."""
         lines = [
-            f"Extract the following fields according to this schema:",
-            f"",
+            "Extract the following fields according to this schema:",
+            "",
             f"Schema: {schema.name}",
             f"Description: {schema.description}",
-            f"",
-            f"Fields to extract:",
+            "",
+            "Fields to extract:",
         ]
         
         for field_name, field_info in schema.fields.items():

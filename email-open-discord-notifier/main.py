@@ -24,6 +24,7 @@ from src.database import (
     log_email_open,
     get_recent_opens,
     get_opens_by_date,
+    get_opens_by_lead,
     get_analytics_summary,
     get_top_leads,
     get_opens_by_time_of_day,

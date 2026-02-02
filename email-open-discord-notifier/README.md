@@ -34,6 +34,9 @@ cp .env.example .env
 # Run the service
 python main.py
 
+# Or run directly with uvicorn (correct syntax)
+uvicorn main:app --host 0.0.0.0 --port 8000
+
 # Service will start on http://localhost:8000
 ```
 

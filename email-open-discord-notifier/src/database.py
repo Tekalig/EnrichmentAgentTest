@@ -12,6 +12,7 @@ OPTIMIZED SCHEMA:
 """
 
 from datetime import datetime
+from pathlib import Path
 from typing import List, Optional, Dict
 
 from sqlalchemy import (
@@ -88,13 +89,37 @@ class EmailOpenLog(Base):
     )
 
 
+def ensure_db_directory():
+    """Ensure the database directory exists for SQLite databases."""
+    if settings.DATABASE_URL.startswith("sqlite"):
+        # Extract file path from SQLite URL (format: sqlite+aiosqlite:///./data/email_opens.db)
+        db_path = settings.DATABASE_URL.replace("sqlite+aiosqlite:///", "").replace("sqlite:///", "")
+        if db_path.startswith("./"):
+            db_path = db_path[2:]  # Remove leading ./
+        db_file = Path(db_path)
+        db_file.parent.mkdir(parents=True, exist_ok=True)
+
+
+# Ensure database directory exists before creating engine
+ensure_db_directory()
+
 # Create async engine
+# SQLite doesn't support pool_size/max_overflow, so conditionally apply them
+engine_kwargs = {
+    "echo": settings.DEBUG,
+    "pool_pre_ping": True,  # Verify connections before use
+}
+
+# Only add pool parameters for non-SQLite databases
+if not settings.DATABASE_URL.startswith("sqlite"):
+    engine_kwargs.update({
+        "pool_size": 10,  # Connection pool
+        "max_overflow": 20  # Allow extra connections
+    })
+
 engine = create_async_engine(
     settings.DATABASE_URL,
-    echo=settings.DEBUG,
-    pool_pre_ping=True,  # Verify connections before use
-    pool_size=10,  # Connection pool
-    max_overflow=20  # Allow extra connections
+    **engine_kwargs
 )
 
 # Create async session factory

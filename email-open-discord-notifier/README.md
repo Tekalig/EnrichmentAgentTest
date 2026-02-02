@@ -98,17 +98,17 @@ curl http://localhost:8000/analytics/summary
 # Recent opens
 curl http://localhost:8000/analytics/recent?limit=10
 
-# By date
-curl http://localhost:8000/analytics/by-date?date=2024-01-30
+# By date (start_date and end_date in YYYY-MM-DD)
+curl "http://localhost:8000/analytics/by-date?start_date=2024-01-01&end_date=2024-01-31"
 
 # Top leads
 curl http://localhost:8000/analytics/top-leads?limit=10
 
 # By time of day
-curl http://localhost:8000/analytics/by-time
+curl http://localhost:8000/analytics/time-of-day
 
 # By day of week
-curl http://localhost:8000/analytics/by-day
+curl http://localhost:8000/analytics/day-of-week
 
 # Engagement metrics
 curl http://localhost:8000/analytics/engagement

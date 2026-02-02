@@ -2,7 +2,7 @@
 
 from typing import Dict, Any, List, Optional
 from datetime import datetime
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 import json
 
 
@@ -52,6 +52,8 @@ class PromptTemplate(BaseModel):
 
 class EnrichmentResult(BaseModel):
     """Result of enrichment process."""
+    model_config = ConfigDict(protected_namespaces=())  # allow model_used field
+
     company_name: str
     url: str
     schema_used: str
